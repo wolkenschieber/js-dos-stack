@@ -31,7 +31,7 @@ RUN \
     && curl -O https://v8.js-dos.com/latest/js-dos.css
 
 
-FROM node:16-alpine AS run
+FROM node:20-alpine AS run
 
 WORKDIR /site
 RUN \
@@ -41,4 +41,5 @@ COPY --from=build /site .
 COPY --from=build /game/game.jsdos .
 COPY include/index.html .
 
+EXPOSE 8000
 ENTRYPOINT ["npx", "serve", "-l", "tcp://0.0.0.0:8000"]
